@@ -173,6 +173,25 @@
   margin-top: 8rpx;
 }
 
+.more-card {
+  margin-top: 36rpx;
+  padding: 24rpx 20rpx;
+  background: #efeee8;
+  border-radius: 12rpx;
+}
+
+.more-title {
+  font-size: 22rpx;
+  color: #8a8b82;
+  margin-bottom: 8rpx;
+}
+
+.more-link {
+  font-size: 26rpx;
+  color: #a83d30;
+  padding: 12rpx 0;
+}
+
 .site-footer {
   padding: 40rpx 0 20rpx;
   font-size: 21rpx;

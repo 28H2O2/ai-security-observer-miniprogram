@@ -76,6 +76,14 @@ Page({
     wx.switchTab({ url: '/pages/index/index' });
   },
 
+  goRules() {
+    wx.navigateTo({ url: '/pages/risk-rules/risk-rules' });
+  },
+
+  goAbout() {
+    wx.navigateTo({ url: '/pages/about/about' });
+  },
+
   onShareAppMessage() {
     return { title: '复旦 JADE · AI 安全观察 来源库', path: '/pages/sources/sources' };
   },

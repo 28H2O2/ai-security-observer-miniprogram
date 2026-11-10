@@ -1,10 +1,17 @@
-// 三个列表页共用的 Page 配置工厂，避免复制三份相同逻辑
-// WXML 里用到的文案、class 都在这里预计算，模板只保留最简单的变量绑定
+// 三个列表页共用的 Page 配置工厂
+// 首页只保留「浏览」能力；导出、说明类入口移到详情页与来源页
+// WXML 用到的文案、class 都在这里预计算，模板只保留最简单的变量绑定
 const store = require('./data.js');
 const { filterItems, topics } = require('./model.js');
 const { listToCards } = require('./view.js');
-const { exportMarkdown, exportJson } = require('./publication.js');
 const { RISK_RULES } = require('./risk-rules.js');
+
+const SUMMARY_LIMIT = 56;
+
+function briefSummary(text) {
+  const clean = String(text || '').replace(/\s+/g, ' ').trim();
+  return clean.length > SUMMARY_LIMIT ? clean.slice(0, SUMMARY_LIMIT) + '…' : clean;
+}
 
 function topicItems() {
   return topics.map(entry => ({
@@ -20,7 +27,7 @@ function decorateCards(list, read, sort) {
     itemClass: 'news-item' + (card.isRead ? ' is-read' : ''),
     kindClass: 'kind kind-' + card.kind,
     asoClassName: 'aso aso-' + (card.asoClass || 'low'),
-    tagList: (card.tags || []).map((label, index) => ({ id: index, label })),
+    briefSummary: briefSummary(card.summary),
   }));
 }
 
@@ -59,7 +66,7 @@ function initialData(view, title, defs) {
     topic: 'all',
     topicList: topicItems(),
     filterOpen: false,
-    filterHint: '展开',
+    filterHint: '筛选',
     unread: false,
     cards: [],
     count: 0,
@@ -128,7 +135,7 @@ function create(view, title) {
         this.setData({
           cards: decorateCards(list, read, filters.sort),
           count: list.length,
-          resultText: `${list.length} 条${filters.sort === 'risk' ? ' · ASO 由高到低' : ''}`,
+          resultText: `${list.length} 条`,
           loading: false,
           ready: list.length > 0,
           emptyState: list.length === 0,
@@ -166,7 +173,7 @@ function create(view, title) {
 
     toggleFilter() {
       const filterOpen = !this.data.filterOpen;
-      this.setData({ filterOpen, filterHint: filterOpen ? '收起' : '展开' });
+      this.setData({ filterOpen, filterHint: filterOpen ? '收起' : '筛选' });
     },
 
     onPicker(event) {
@@ -196,27 +203,6 @@ function create(view, title) {
     openItem(event) {
       const id = event.currentTarget.dataset.id;
       wx.navigateTo({ url: `/pages/item/item?id=${encodeURIComponent(id)}` });
-    },
-
-    copyOriginal(event) {
-      store.copyText(event.currentTarget.dataset.url, '原文链接已复制');
-    },
-
-    onExport(event) {
-      const filters = this.currentFilters();
-      const list = filterItems(store.items, filters, store.loadRead(), store.meta.updatedAt);
-      const text = event.currentTarget.dataset.type === 'json'
-        ? exportJson(list, store.meta, filters)
-        : exportMarkdown(list, store.meta);
-      store.copyText(text, `已复制 ${list.length} 条`);
-    },
-
-    goRules() {
-      wx.navigateTo({ url: '/pages/risk-rules/risk-rules' });
-    },
-
-    goAbout() {
-      wx.navigateTo({ url: '/pages/about/about' });
     },
 
     onShareAppMessage() {

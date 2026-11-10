@@ -31,7 +31,7 @@ function fallbackPage(message) {
       q: '',
       topicList: [],
       filterOpen: false,
-      filterHint: '展开',
+      filterHint: '筛选',
       unread: false,
       cards: [],
       count: 0,

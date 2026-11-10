@@ -44,5 +44,11 @@
     <view class="notes">{{selected.notes}}</view>
   </view>
 
+  <view class="more-card">
+    <view class="more-title">了解更多</view>
+    <view class="more-link" bindtap="goRules">评分规则 →</view>
+    <view class="more-link" bindtap="goAbout">来源与核验说明 →</view>
+  </view>
+
   <view class="site-footer">status = checked 仅代表公开入口检查通过，不代表采集器已运行。</view>
 </view>

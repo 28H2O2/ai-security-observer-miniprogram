@@ -2,28 +2,21 @@
   <view class="masthead">
     <image class="jade-logo" src="/assets/jade-logo.png" mode="aspectFit"></image>
     <view class="brand-copy">
-      <view class="brand-kicker">FUDAN JADE · SECURITY INTELLIGENCE</view>
       <view class="site-title">AI 安全观察</view>
-      <view class="brand-scope">真实事件 / 漏洞公告 / 研究披露</view>
-      <view class="snapshot">资料更新 {{updatedAt}} · {{total}} 条 · 本地快照</view>
+      <view class="snapshot">{{total}} 条 · 资料更新 {{updatedAt}}</view>
     </view>
   </view>
 
-  <view class="quick-links">
-    <view class="quick-link" bindtap="goRules">评分规则</view>
-    <view class="quick-link" bindtap="goAbout">来源与核验说明</view>
-  </view>
-
   <view class="search-box">
-    <input class="search-input" value="{{q}}" bindinput="onSearch" confirm-type="search" placeholder="搜索标题、内容或 CVE 编号" placeholder-class="placeholder" />
+    <input class="search-input" value="{{q}}" bindinput="onSearch" confirm-type="search" placeholder="搜索情报或 CVE 编号" placeholder-class="placeholder" />
   </view>
 
   <view class="topic-row">
     <view wx:for="{{topicList}}" wx:key="id" class="{{item.className}}" data-value="{{item.id}}" bindtap="onTopic">{{item.label}}</view>
   </view>
 
-  <view class="filter-toggle" bindtap="toggleFilter">
-    <text>筛选</text>
+  <view class="toolbar" bindtap="toggleFilter">
+    <text class="result-count">{{resultText}}</text>
     <text class="filter-hint">{{filterHint}}</text>
   </view>
 
@@ -50,14 +43,6 @@
     <view class="filter-reset" bindtap="resetFilters">清空筛选</view>
   </view>
 
-  <view class="export-bar">
-    <text class="result-count">{{resultText}}</text>
-    <view class="export-actions">
-      <view class="text-link" bindtap="onExport" data-type="md">复制 Markdown</view>
-      <view class="text-link" bindtap="onExport" data-type="json">复制 JSON</view>
-    </view>
-  </view>
-
   <view wx:if="{{loading}}" class="state-card">
     <text class="state-title">正在载入情报…</text>
   </view>
@@ -68,14 +53,12 @@
   </view>
   <view wx:if="{{emptyState}}" class="state-card">
     <text class="state-title">没有匹配结果</text>
-    <text class="state-description">更换关键词或清空筛选。</text>
     <view class="outline-button" bindtap="resetFilters">清空筛选</view>
   </view>
 
   <view wx:if="{{ready}}" class="feed-list">
     <view wx:for="{{cards}}" wx:key="id" wx:for-item="card">
       <view wx:if="{{card.dayHeading}}" class="day-label">
-        <text class="day-year">{{card.year}}</text>
         <text class="day-text">{{card.dayHeading}}</text>
         <view class="day-rule"></view>
       </view>
@@ -84,20 +67,11 @@
           <text class="{{card.kindClass}}">{{card.kindLabel}}</text>
           <text class="meta-source">{{card.sourceName}}</text>
           <text wx:if="{{card.showDate}}" class="meta-date">{{card.dateText}}</text>
-          <text wx:if="{{card.isCompilation}}" class="compilation">PDF 汇编</text>
           <text wx:if="{{card.asoText}}" class="{{card.asoClassName}}">{{card.asoText}}</text>
         </view>
         <view class="news-title">{{card.title}}</view>
-        <view class="news-summary">{{card.summary}}</view>
-        <view class="news-footer">
-          <view class="tags">
-            <text wx:for="{{card.tagList}}" wx:for-item="tag" wx:key="id" class="tag">{{tag.label}}</text>
-          </view>
-          <text wx:if="{{card.originalUrl}}" class="copy-link" catchtap="copyOriginal" data-url="{{card.originalUrl}}">复制原文链接</text>
-        </view>
+        <view wx:if="{{card.briefSummary}}" class="news-summary">{{card.briefSummary}}</view>
       </view>
     </view>
   </view>
-
-  <view class="site-footer">复旦 JADE · AI 安全观察 ｜ 人工整理，非实时核验 ｜ 原始来源版权归原作者</view>
 </view>
