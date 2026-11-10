@@ -18,13 +18,13 @@
     <input class="search-input" value="{{q}}" bindinput="onSearch" confirm-type="search" placeholder="搜索标题、内容或 CVE 编号" placeholder-class="placeholder" />
   </view>
 
-  <scroll-view class="topic-row" scroll-x="true">
-    <view wx:for="{{topicList}}" wx:key="id" class="topic {{item.active ? 'active' : ''}}" data-value="{{item.id}}" bindtap="onTopic">{{item.label}}</view>
-  </scroll-view>
+  <view class="topic-row">
+    <view wx:for="{{topicList}}" wx:key="id" class="{{item.className}}" data-value="{{item.id}}" bindtap="onTopic">{{item.label}}</view>
+  </view>
 
   <view class="filter-toggle" bindtap="toggleFilter">
     <text>筛选</text>
-    <text class="filter-hint">{{filterOpen ? '收起' : '展开'}}</text>
+    <text class="filter-hint">{{filterHint}}</text>
   </view>
 
   <view wx:if="{{filterOpen}}" class="filter-panel">
@@ -51,51 +51,52 @@
   </view>
 
   <view class="export-bar">
-    <text class="result-count">{{count}} 条{{sort === 'risk' ? ' · ASO 由高到低' : ''}}</text>
+    <text class="result-count">{{resultText}}</text>
     <view class="export-actions">
       <view class="text-link" bindtap="onExport" data-type="md">复制 Markdown</view>
       <view class="text-link" bindtap="onExport" data-type="json">复制 JSON</view>
     </view>
   </view>
 
-  <view wx:if="{{viewState === 'loading'}}" class="state-card">
+  <view wx:if="{{loading}}" class="state-card">
     <text class="state-title">正在载入情报…</text>
   </view>
-  <view wx:elif="{{viewState === 'error'}}" class="state-card">
+  <view wx:if="{{errorState}}" class="state-card">
     <text class="state-title">暂时无法载入资料</text>
-    <text class="state-description">本地数据读取失败，请重试。</text>
-    <button class="outline-button" bindtap="handleRetry">重新加载</button>
+    <text class="state-description">{{errorText}}</text>
+    <view class="outline-button" bindtap="handleRetry">重新加载</view>
   </view>
-  <view wx:elif="{{count === 0}}" class="state-card">
+  <view wx:if="{{emptyState}}" class="state-card">
     <text class="state-title">没有匹配结果</text>
     <text class="state-description">更换关键词或清空筛选。</text>
     <view class="outline-button" bindtap="resetFilters">清空筛选</view>
   </view>
-  <view wx:else class="feed-list">
-    <block wx:for="{{cards}}" wx:key="id" wx:for-item="card">
+
+  <view wx:if="{{ready}}" class="feed-list">
+    <view wx:for="{{cards}}" wx:key="id" wx:for-item="card">
       <view wx:if="{{card.dayHeading}}" class="day-label">
         <text class="day-year">{{card.year}}</text>
         <text class="day-text">{{card.dayHeading}}</text>
         <view class="day-rule"></view>
       </view>
-      <view class="news-item {{card.isRead ? 'is-read' : ''}}" bindtap="openItem" data-id="{{card.id}}">
+      <view class="{{card.itemClass}}" bindtap="openItem" data-id="{{card.id}}">
         <view class="article-meta">
-          <text class="kind kind-{{card.kind}}">{{card.kindLabel}}</text>
+          <text class="{{card.kindClass}}">{{card.kindLabel}}</text>
           <text class="meta-source">{{card.sourceName}}</text>
           <text wx:if="{{card.showDate}}" class="meta-date">{{card.dateText}}</text>
           <text wx:if="{{card.isCompilation}}" class="compilation">PDF 汇编</text>
-          <text wx:if="{{card.asoText}}" class="aso aso-{{card.asoClass}}">{{card.asoText}}</text>
+          <text wx:if="{{card.asoText}}" class="{{card.asoClassName}}">{{card.asoText}}</text>
         </view>
         <view class="news-title">{{card.title}}</view>
         <view class="news-summary">{{card.summary}}</view>
         <view class="news-footer">
           <view class="tags">
-            <text wx:for="{{card.tags}}" wx:for-item="tag" wx:key="*this" class="tag">{{tag}}</text>
+            <text wx:for="{{card.tagList}}" wx:for-item="tag" wx:key="id" class="tag">{{tag.label}}</text>
           </view>
           <text wx:if="{{card.originalUrl}}" class="copy-link" catchtap="copyOriginal" data-url="{{card.originalUrl}}">复制原文链接</text>
         </view>
       </view>
-    </block>
+    </view>
   </view>
 
   <view class="site-footer">复旦 JADE · AI 安全观察 ｜ 人工整理，非实时核验 ｜ 原始来源版权归原作者</view>

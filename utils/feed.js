@@ -1,16 +1,35 @@
 // 三个列表页共用的 Page 配置工厂，避免复制三份相同逻辑
+// WXML 里用到的文案、class 都在这里预计算，模板只保留最简单的变量绑定
 const store = require('./data.js');
 const { filterItems, topics } = require('./model.js');
 const { listToCards } = require('./view.js');
 const { exportMarkdown, exportJson } = require('./publication.js');
 const { RISK_RULES } = require('./risk-rules.js');
 
+function topicItems() {
+  return topics.map(entry => ({
+    id: entry.id,
+    label: entry.label,
+    active: entry.id === 'all',
+    className: 'topic' + (entry.id === 'all' ? ' active' : ''),
+  }));
+}
+
+function decorateCards(list, read, sort) {
+  return listToCards(list, read, sort).map(card => Object.assign({}, card, {
+    itemClass: 'news-item' + (card.isRead ? ' is-read' : ''),
+    kindClass: 'kind kind-' + card.kind,
+    asoClassName: 'aso aso-' + (card.asoClass || 'low'),
+    tagList: (card.tags || []).map((label, index) => ({ id: index, label })),
+  }));
+}
+
 function pickerDefs(view) {
   const used = store.usedSources(view);
   return {
     source: {
-      values: ['all', ...used.map(entry => entry.id)],
-      labels: ['全部来源', ...used.map(entry => `${entry.label} (${entry.count})`)],
+      values: ['all'].concat(used.map(entry => entry.id)),
+      labels: ['全部来源'].concat(used.map(entry => `${entry.label} (${entry.count})`)),
     },
     evidence: {
       values: ['all', 'primary', 'compilation'],
@@ -38,12 +57,18 @@ function initialData(view, title, defs) {
     total: store.meta.total,
     q: '',
     topic: 'all',
-    topicList: topics.map(entry => ({ id: entry.id, label: entry.label, active: entry.id === 'all' })),
+    topicList: topicItems(),
     filterOpen: false,
+    filterHint: '展开',
     unread: false,
     cards: [],
     count: 0,
-    viewState: 'loading',
+    resultText: '0 条',
+    loading: true,
+    ready: false,
+    emptyState: false,
+    errorState: false,
+    errorText: '',
   };
   Object.keys(defs).forEach(key => {
     data[key] = defs[key].values[0];
@@ -65,8 +90,8 @@ function create(view, title) {
     },
 
     onShow() {
-      const app = getApp();
-      const pending = app.globalData.pendingFilter;
+      const app = typeof getApp === 'function' ? getApp() : null;
+      const pending = app && app.globalData ? app.globalData.pendingFilter : null;
       if (pending && pending.source) {
         app.globalData.pendingFilter = null;
         const index = Math.max(0, this.data.sourceValues.indexOf(pending.source));
@@ -101,18 +126,29 @@ function create(view, title) {
         const read = store.loadRead();
         const list = filterItems(store.items, filters, read, store.meta.updatedAt);
         this.setData({
-          cards: listToCards(list, read, filters.sort),
+          cards: decorateCards(list, read, filters.sort),
           count: list.length,
-          viewState: 'ready',
+          resultText: `${list.length} 条${filters.sort === 'risk' ? ' · ASO 由高到低' : ''}`,
+          loading: false,
+          ready: list.length > 0,
+          emptyState: list.length === 0,
+          errorState: false,
+          errorText: '',
         });
       } catch (error) {
         console.error('[aso] 资料载入失败', error);
-        this.setData({ viewState: 'error' });
+        this.setData({
+          loading: false,
+          ready: false,
+          emptyState: false,
+          errorState: true,
+          errorText: error && error.message ? error.message : '本地数据读取失败，请重试。',
+        });
       }
     },
 
     handleRetry() {
-      this.setData({ viewState: 'loading' }, () => this.refresh());
+      this.setData({ loading: true, ready: false, emptyState: false, errorState: false }, () => this.refresh());
     },
 
     onSearch(event) {
@@ -121,12 +157,16 @@ function create(view, title) {
 
     onTopic(event) {
       const value = event.currentTarget.dataset.value;
-      const topicList = this.data.topicList.map(entry => ({ ...entry, active: entry.id === value }));
+      const topicList = this.data.topicList.map(entry => Object.assign({}, entry, {
+        active: entry.id === value,
+        className: 'topic' + (entry.id === value ? ' active' : ''),
+      }));
       this.setData({ topic: value, topicList }, () => this.refresh());
     },
 
     toggleFilter() {
-      this.setData({ filterOpen: !this.data.filterOpen });
+      const filterOpen = !this.data.filterOpen;
+      this.setData({ filterOpen, filterHint: filterOpen ? '收起' : '展开' });
     },
 
     onPicker(event) {
@@ -144,8 +184,7 @@ function create(view, title) {
     },
 
     resetFilters() {
-      const patch = { q: '', topic: 'all', unread: false };
-      patch.topicList = this.data.topicList.map(entry => ({ ...entry, active: entry.id === 'all' }));
+      const patch = { q: '', topic: 'all', unread: false, topicList: topicItems() };
       Object.keys(defs).forEach(key => {
         patch[key] = defs[key].values[0];
         patch[`${key}Index`] = 0;

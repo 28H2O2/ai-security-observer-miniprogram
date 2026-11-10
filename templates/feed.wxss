@@ -74,6 +74,9 @@
 }
 
 .topic-row {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
   white-space: nowrap;
   width: 100%;
   margin: 20rpx 0 8rpx;
@@ -81,6 +84,7 @@
 
 .topic {
   display: inline-block;
+  flex: none;
   padding: 12rpx 24rpx;
   margin-right: 12rpx;
   border-radius: 6rpx;
