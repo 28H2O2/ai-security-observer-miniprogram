@@ -1,0 +1,21 @@
+{
+  "description": "复旦 JADE · AI 安全观察（本地静态数据小程序）",
+  "packOptions": {
+    "ignore": [
+      { "type": "folder", "value": ".workbuddy" },
+      { "type": "folder", "value": "scripts" }
+    ],
+    "include": []
+  },
+  "setting": {
+    "bundle": false,
+    "es6": true,
+    "minified": true,
+    "postcss": true,
+    "urlCheck": true
+  },
+  "compileType": "miniprogram",
+  "appid": "touristappid",
+  "projectname": "ai-security-observer-miniprogram",
+  "miniprogramRoot": "./"
+}

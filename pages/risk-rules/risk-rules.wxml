@@ -1,0 +1,39 @@
+<view class="page-shell">
+  <view class="page-title">评分规则</view>
+  <view class="version">{{version}} · ASO Risk Score v1.0</view>
+
+  <view class="formula-card">
+    <view class="formula-label">总分公式</view>
+    <view class="formula">{{formula}} = {{max}}</view>
+    <view class="weight-row">
+      <view wx:for="{{dimensions}}" wx:key="key" wx:for-item="dim" class="weight weight-{{dim.color}}">{{dim.key}} {{dim.weight}} 分</view>
+    </view>
+  </view>
+
+  <view wx:for="{{dimensions}}" wx:key="key" wx:for-item="dim" class="dimension-card dimension-{{dim.color}}">
+    <view class="dimension-head">
+      <view class="dimension-name">{{dim.key}} · {{dim.name}}</view>
+      <view class="dimension-sub">{{dim.english}} · 权重 {{dim.coefficient}} × 5</view>
+    </view>
+    <view wx:for="{{dim.anchors}}" wx:for-item="anchor" wx:key="level" class="anchor">
+      <view class="anchor-level">{{anchor.level}}</view>
+      <view class="anchor-text">{{anchor.text}}</view>
+    </view>
+  </view>
+
+  <view class="status-card">
+    <view class="section-title">评估覆盖（{{total}} 条）</view>
+    <view wx:for="{{statuses}}" wx:key="label" wx:for-item="status" class="status-row">
+      <text>{{status.label}}</text>
+      <text class="status-count">{{status.count}} 条</text>
+    </view>
+  </view>
+
+  <view class="disclaimer">
+    <view class="section-title">边界说明</view>
+    <view class="disclaimer-text">ASO 是本站自定义指标，非 CVSS、EPSS 或攻击概率。四维分值来自逐条核对的原始证据，证据缺失时不生成总分。全部评估标注为尚未人工复核；评分只描述已收录资料，不代表实时风险监测。</view>
+  </view>
+
+  <view class="outline-button" bindtap="goFeed">按风险筛选情报 →</view>
+  <view class="site-footer">完整维护步骤与限制见网页项目的 docs/aso-risk-score.md。</view>
+</view>

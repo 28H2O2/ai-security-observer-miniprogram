@@ -1,0 +1,17 @@
+# macOS / 编辑器
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# 微信开发者工具本地配置（可能含个人 AppID 与调试设置）
+project.private.config.json
+
+# 依赖与日志
+node_modules/
+*.log
+
+# WorkBuddy 工程元数据：保留在本地磁盘，不纳入版本库
+.workbuddy/
+
+# 注意：data/*.js 是本地静态数据版运行必需，必须随仓库提交，不要忽略

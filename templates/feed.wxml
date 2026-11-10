@@ -1,0 +1,102 @@
+<view class="page-shell">
+  <view class="masthead">
+    <image class="jade-logo" src="/assets/jade-logo.png" mode="aspectFit"></image>
+    <view class="brand-copy">
+      <view class="brand-kicker">FUDAN JADE · SECURITY INTELLIGENCE</view>
+      <view class="site-title">AI 安全观察</view>
+      <view class="brand-scope">真实事件 / 漏洞公告 / 研究披露</view>
+      <view class="snapshot">资料更新 {{updatedAt}} · {{total}} 条 · 本地快照</view>
+    </view>
+  </view>
+
+  <view class="quick-links">
+    <view class="quick-link" bindtap="goRules">评分规则</view>
+    <view class="quick-link" bindtap="goAbout">来源与核验说明</view>
+  </view>
+
+  <view class="search-box">
+    <input class="search-input" value="{{q}}" bindinput="onSearch" confirm-type="search" placeholder="搜索标题、内容或 CVE 编号" placeholder-class="placeholder" />
+  </view>
+
+  <scroll-view class="topic-row" scroll-x="true">
+    <view wx:for="{{topicList}}" wx:key="id" class="topic {{item.active ? 'active' : ''}}" data-value="{{item.id}}" bindtap="onTopic">{{item.label}}</view>
+  </scroll-view>
+
+  <view class="filter-toggle" bindtap="toggleFilter">
+    <text>筛选</text>
+    <text class="filter-hint">{{filterOpen ? '收起' : '展开'}}</text>
+  </view>
+
+  <view wx:if="{{filterOpen}}" class="filter-panel">
+    <picker mode="selector" range="{{sourceLabels}}" value="{{sourceIndex}}" bindchange="onPicker" data-key="source">
+      <view class="filter-row"><text>来源</text><text class="filter-value">{{sourceLabel}}</text></view>
+    </picker>
+    <picker mode="selector" range="{{evidenceLabels}}" value="{{evidenceIndex}}" bindchange="onPicker" data-key="evidence">
+      <view class="filter-row"><text>资料类型</text><text class="filter-value">{{evidenceLabel}}</text></view>
+    </picker>
+    <picker mode="selector" range="{{periodLabels}}" value="{{periodIndex}}" bindchange="onPicker" data-key="period">
+      <view class="filter-row"><text>时间范围</text><text class="filter-value">{{periodLabel}}</text></view>
+    </picker>
+    <picker mode="selector" range="{{assessmentLabels}}" value="{{assessmentIndex}}" bindchange="onPicker" data-key="assessment">
+      <view class="filter-row"><text>风险评估</text><text class="filter-value">{{assessmentLabel}}</text></view>
+    </picker>
+    <picker mode="selector" range="{{sortLabels}}" value="{{sortIndex}}" bindchange="onPicker" data-key="sort">
+      <view class="filter-row"><text>排序</text><text class="filter-value">{{sortLabel}}</text></view>
+    </picker>
+    <view class="filter-row">
+      <text>只看未读</text>
+      <switch checked="{{unread}}" bindchange="onUnread" color="#a83d30" />
+    </view>
+    <view class="filter-reset" bindtap="resetFilters">清空筛选</view>
+  </view>
+
+  <view class="export-bar">
+    <text class="result-count">{{count}} 条{{sort === 'risk' ? ' · ASO 由高到低' : ''}}</text>
+    <view class="export-actions">
+      <view class="text-link" bindtap="onExport" data-type="md">复制 Markdown</view>
+      <view class="text-link" bindtap="onExport" data-type="json">复制 JSON</view>
+    </view>
+  </view>
+
+  <view wx:if="{{viewState === 'loading'}}" class="state-card">
+    <text class="state-title">正在载入情报…</text>
+  </view>
+  <view wx:elif="{{viewState === 'error'}}" class="state-card">
+    <text class="state-title">暂时无法载入资料</text>
+    <text class="state-description">本地数据读取失败，请重试。</text>
+    <button class="outline-button" bindtap="handleRetry">重新加载</button>
+  </view>
+  <view wx:elif="{{count === 0}}" class="state-card">
+    <text class="state-title">没有匹配结果</text>
+    <text class="state-description">更换关键词或清空筛选。</text>
+    <view class="outline-button" bindtap="resetFilters">清空筛选</view>
+  </view>
+  <view wx:else class="feed-list">
+    <block wx:for="{{cards}}" wx:key="id" wx:for-item="card">
+      <view wx:if="{{card.dayHeading}}" class="day-label">
+        <text class="day-year">{{card.year}}</text>
+        <text class="day-text">{{card.dayHeading}}</text>
+        <view class="day-rule"></view>
+      </view>
+      <view class="news-item {{card.isRead ? 'is-read' : ''}}" bindtap="openItem" data-id="{{card.id}}">
+        <view class="article-meta">
+          <text class="kind kind-{{card.kind}}">{{card.kindLabel}}</text>
+          <text class="meta-source">{{card.sourceName}}</text>
+          <text wx:if="{{card.showDate}}" class="meta-date">{{card.dateText}}</text>
+          <text wx:if="{{card.isCompilation}}" class="compilation">PDF 汇编</text>
+          <text wx:if="{{card.asoText}}" class="aso aso-{{card.asoClass}}">{{card.asoText}}</text>
+        </view>
+        <view class="news-title">{{card.title}}</view>
+        <view class="news-summary">{{card.summary}}</view>
+        <view class="news-footer">
+          <view class="tags">
+            <text wx:for="{{card.tags}}" wx:for-item="tag" wx:key="*this" class="tag">{{tag}}</text>
+          </view>
+          <text wx:if="{{card.originalUrl}}" class="copy-link" catchtap="copyOriginal" data-url="{{card.originalUrl}}">复制原文链接</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <view class="site-footer">复旦 JADE · AI 安全观察 ｜ 人工整理，非实时核验 ｜ 原始来源版权归原作者</view>
+</view>

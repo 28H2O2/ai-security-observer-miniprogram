@@ -1,0 +1,60 @@
+<view class="page-shell">
+  <view class="page-heading">
+    <view class="page-title">安全简报</view>
+    <view class="page-kicker">JADE SECURITY BRIEFING</view>
+  </view>
+  <view class="intro">按已收录资料汇编，集中阅读事件、漏洞与研究进展。</view>
+
+  <view class="briefing-controls">
+    <view class="mode-switch">
+      <view class="mode {{mode === 'daily' ? 'active' : ''}}" data-mode="daily" bindtap="onMode">按日</view>
+      <view class="mode {{mode === 'weekly' ? 'active' : ''}}" data-mode="weekly" bindtap="onMode">按周</view>
+    </view>
+    <picker mode="date" value="{{date}}" bindchange="onDate">
+      <view class="date-picker">选择日期：{{date}}</view>
+    </picker>
+    <view class="outline-button" bindtap="copyMarkdown">复制 Markdown</view>
+  </view>
+
+  <scroll-view class="archive" scroll-x="true">
+    <view wx:for="{{archive}}" wx:key="start" wx:for-item="entry" class="archive-item {{entry.active ? 'active' : ''}}" data-start="{{entry.start}}" bindtap="onArchive">
+      <text>{{entry.label}}</text>
+      <text class="archive-count">{{entry.total}} 条</text>
+    </view>
+  </scroll-view>
+
+  <view wx:if="{{viewState === 'loading'}}" class="state-card"><text class="state-title">正在汇编简报…</text></view>
+  <view wx:elif="{{viewState === 'error'}}" class="state-card">
+    <text class="state-title">暂时无法生成简报</text>
+    <view class="outline-button" bindtap="handleRetry">重试</view>
+  </view>
+
+  <block wx:elif="{{briefing}}">
+    <view class="briefing-header">
+      <view class="briefing-kicker">FUDAN JADE · SECURITY BRIEFING</view>
+      <view class="briefing-title">安全{{modeLabel}}</view>
+      <view class="briefing-period">{{briefing.startText}}<text wx:if="{{mode === 'weekly'}}"> — {{briefing.endText}}</text></view>
+      <view class="snapshot">覆盖 {{briefing.start}} 至 {{briefing.end}} · {{briefing.total}} 条 ｜ 资料更新 {{updatedAt}} ｜ 人工整理，非实时核验</view>
+    </view>
+
+    <view wx:if="{{!briefing.hasItems}}" class="state-card">
+      <text class="state-title">本站暂无收录</text>
+      <text class="state-description">请选择其他日期，或从上方归档查看已有简报。</text>
+    </view>
+
+    <block wx:else>
+      <view wx:for="{{briefing.sections}}" wx:key="label" wx:for-item="section" class="briefing-section">
+        <view class="section-title">{{section.label}} · {{section.count}} 条</view>
+        <view wx:if="{{!section.hasItems}}" class="section-empty">本站暂无收录。</view>
+        <view wx:for="{{section.items}}" wx:for-item="entry" wx:key="id" class="briefing-item" bindtap="openItem" data-id="{{entry.id}}">
+          <view class="briefing-item-meta">{{entry.kindLabel}} · {{entry.dateText}}</view>
+          <view class="briefing-item-title">{{entry.title}}</view>
+          <view class="briefing-item-summary">{{entry.summary}}</view>
+          <view class="briefing-item-more">查看详情与原始来源 →</view>
+        </view>
+      </view>
+    </block>
+  </block>
+
+  <view class="site-footer">简报只读同一份去重数据，不生成未经核验的新结论。</view>
+</view>

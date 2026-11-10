@@ -1,0 +1,146 @@
+.page-title {
+  font-size: 44rpx;
+  font-weight: 500;
+  padding: 30rpx 0 6rpx;
+}
+
+.version {
+  font-size: 21rpx;
+  color: #8a8b82;
+  margin-bottom: 24rpx;
+}
+
+.formula-card {
+  background: #efeee8;
+  border-radius: 12rpx;
+  padding: 26rpx 24rpx;
+  margin-bottom: 26rpx;
+}
+
+.formula-label {
+  font-size: 22rpx;
+  color: #66695f;
+}
+
+.formula {
+  font-size: 32rpx;
+  color: #a83d30;
+  margin-top: 10rpx;
+}
+
+.weight-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  margin-top: 18rpx;
+}
+
+.weight {
+  font-size: 20rpx;
+  color: #ffffff;
+  padding: 6rpx 14rpx;
+  border-radius: 4rpx;
+}
+
+.weight-red { background: #a83d30; }
+.weight-amber { background: #a9761c; }
+.weight-teal { background: #4f6546; }
+.weight-indigo { background: #3f4f80; }
+
+.dimension-card {
+  border-radius: 12rpx;
+  padding: 24rpx 22rpx;
+  margin-bottom: 20rpx;
+  background: #ffffff;
+}
+
+.dimension-red { border-left: 8rpx solid #a83d30; }
+.dimension-amber { border-left: 8rpx solid #a9761c; }
+.dimension-teal { border-left: 8rpx solid #4f6546; }
+.dimension-indigo { border-left: 8rpx solid #3f4f80; }
+
+.dimension-name {
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+.dimension-sub {
+  font-size: 21rpx;
+  color: #8a8b82;
+  margin-top: 6rpx;
+}
+
+.anchor {
+  display: flex;
+  gap: 16rpx;
+  align-items: flex-start;
+  padding: 12rpx 0;
+  border-top: 1rpx solid #eeefe8;
+}
+
+.anchor-level {
+  flex: none;
+  width: 36rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  text-align: center;
+  border-radius: 18rpx;
+  background: #edeee7;
+  font-size: 21rpx;
+  color: #66695f;
+}
+
+.anchor-text {
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: #4b4d45;
+}
+
+.status-card, .disclaimer {
+  background: #efeee8;
+  border-radius: 12rpx;
+  padding: 24rpx 22rpx;
+  margin-top: 20rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: 500;
+  margin-bottom: 14rpx;
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 25rpx;
+  color: #4b4d45;
+  padding: 10rpx 0;
+}
+
+.status-count {
+  color: #8a8b82;
+}
+
+.disclaimer-text {
+  font-size: 24rpx;
+  line-height: 1.75;
+  color: #66695f;
+}
+
+.outline-button {
+  display: inline-block;
+  margin-top: 26rpx;
+  padding: 14rpx 30rpx;
+  border: 1rpx solid #a83d30;
+  border-radius: 6rpx;
+  color: #a83d30;
+  font-size: 25rpx;
+}
+
+.site-footer {
+  padding: 40rpx 0 20rpx;
+  font-size: 21rpx;
+  line-height: 1.7;
+  color: #8a8b82;
+  text-align: center;
+}

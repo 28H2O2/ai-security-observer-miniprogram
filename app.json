@@ -1,0 +1,35 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/incidents/incidents",
+    "pages/research/research",
+    "pages/briefings/briefings",
+    "pages/sources/sources",
+    "pages/item/item",
+    "pages/risk-rules/risk-rules",
+    "pages/about/about"
+  ],
+  "window": {
+    "navigationBarTitleText": "AI 安全观察",
+    "navigationBarBackgroundColor": "#f7f6f2",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f7f6f2",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#66695f",
+    "selectedColor": "#a83d30",
+    "backgroundColor": "#f7f6f2",
+    "borderStyle": "white",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "情报" },
+      { "pagePath": "pages/incidents/incidents", "text": "事件" },
+      { "pagePath": "pages/research/research", "text": "研究" },
+      { "pagePath": "pages/briefings/briefings", "text": "简报" },
+      { "pagePath": "pages/sources/sources", "text": "来源" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

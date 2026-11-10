@@ -1,0 +1,41 @@
+<view class="page-shell">
+  <view class="page-title">来源与核验说明</view>
+
+  <view class="section">
+    <view class="section-title">这是什么</view>
+    <view class="body">复旦 JADE 公开阅读站的本地小程序版本，整理 AI 安全事件、漏洞公告、攻击研究与原始来源。数据由网页项目人工整理后打包进小程序，不是实时采集。</view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">资料快照</view>
+    <view class="kv"><text>资料更新日期</text><text>{{updatedAt}}</text></view>
+    <view class="kv"><text>收录条目</text><text>{{total}} 条</text></view>
+    <view class="kv"><text>已评分条目</text><text>{{scored}} 条</text></view>
+    <view class="kv"><text>带 CVE 编号</text><text>{{withCve}} 条</text></view>
+    <view class="kv"><text>代码版本</text><text>{{version}}</text></view>
+    <view class="body">更新日期是人工整理的资料快照日期，不代表采集器运行时间，也不代表全部旧资料重新核验。</view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">小程序内的调整</view>
+    <view class="body">· 原始来源链接、团队主页等外部地址改为「复制链接」，可在浏览器中打开；小程序不跳转未备案的外部网页。</view>
+    <view class="body">· Markdown / JSON 导出改为复制到剪贴板，不再生成下载文件。</view>
+    <view class="body">· 来源关系图改为分类列表；已读状态保存在本机，不跨设备同步。</view>
+    <view class="body">· 日报、周报、列表与导出读取同一份去重数据，不生成未经核验的新结论。</view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">证据与版权</view>
+    <view class="body">条目区分潜在后果与实际观测，CVE 公告不等同于已遭利用事件。来源版权归原作者，本站摘要为独立整理，不分发第三方全文或 PDF。</view>
+    <view class="body">ASO 是本站自定义指标，非 CVSS、EPSS 或攻击概率；全部评估标注为尚未人工复核。</view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">联系</view>
+    <view class="body">张谧教授 · 复旦大学 JADE 团队</view>
+    <view class="link" bindtap="copyMail">复制邮箱 mi_zhang@fudan.edu.cn</view>
+    <view class="link" bindtap="goRules">查看评分规则 →</view>
+  </view>
+
+  <view class="site-footer">本版本为本地静态数据预览；内容更新需重新构建并发布小程序版本。</view>
+</view>

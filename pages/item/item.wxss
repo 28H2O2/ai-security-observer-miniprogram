@@ -1,0 +1,311 @@
+.state-card {
+  padding: 100rpx 20rpx;
+  text-align: center;
+}
+
+.state-title {
+  font-size: 30rpx;
+}
+
+.outline-button {
+  display: inline-block;
+  margin-top: 28rpx;
+  padding: 14rpx 32rpx;
+  border: 1rpx solid #a83d30;
+  border-radius: 6rpx;
+  color: #a83d30;
+  font-size: 26rpx;
+}
+
+.back-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16rpx;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #dedfd6;
+}
+
+.back-actions {
+  display: flex;
+  gap: 20rpx;
+}
+
+.back-link {
+  font-size: 23rpx;
+  color: #a83d30;
+}
+
+.detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14rpx;
+  margin-top: 28rpx;
+}
+
+.kind {
+  font-size: 21rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 4rpx;
+  color: #ffffff;
+}
+
+.kind-incident { background: #a83d30; }
+.kind-advisory { background: #a9761c; }
+.kind-research { background: #4f6546; }
+
+.meta-source, .meta-date {
+  font-size: 22rpx;
+  color: #66695f;
+}
+
+.detail-title {
+  font-size: 48rpx;
+  line-height: 1.45;
+  font-weight: 500;
+  margin: 20rpx 0 16rpx;
+}
+
+.detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+}
+
+.tag {
+  font-size: 21rpx;
+  color: #66695f;
+  background: #edeee7;
+  border-radius: 20rpx;
+  padding: 4rpx 14rpx;
+}
+
+.detail-id {
+  font-size: 22rpx;
+  color: #8a8b82;
+  margin-top: 14rpx;
+}
+
+.detail-section {
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #dedfd6;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #292b25;
+  margin-bottom: 18rpx;
+}
+
+.text-link {
+  font-size: 23rpx;
+  color: #a83d30;
+  font-weight: 400;
+}
+
+.reference {
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #e6e6de;
+}
+
+.reference-label {
+  display: block;
+  font-size: 26rpx;
+  color: #a83d30;
+  line-height: 1.5;
+}
+
+.reference-host {
+  display: block;
+  font-size: 21rpx;
+  color: #8a8b82;
+  margin-top: 6rpx;
+}
+
+.muted, .pdf-reference {
+  font-size: 23rpx;
+  color: #66695f;
+  line-height: 1.6;
+}
+
+.pdf-reference {
+  margin-top: 14rpx;
+}
+
+.detail-deck {
+  font-size: 31rpx;
+  line-height: 1.75;
+  color: #292b25;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #dedfd6;
+}
+
+.section-body {
+  font-size: 28rpx;
+  line-height: 1.75;
+  color: #4b4d45;
+}
+
+.package {
+  padding: 14rpx 0;
+}
+
+.package-name {
+  font-size: 26rpx;
+  color: #292b25;
+}
+
+.package-line, .bullet {
+  font-size: 25rpx;
+  line-height: 1.7;
+  color: #66695f;
+}
+
+.evidence-box {
+  background: #efeee8;
+  padding: 26rpx 24rpx;
+  border-radius: 8rpx;
+  border-bottom: none;
+  margin-top: 26rpx;
+}
+
+.risk-card {
+  background: #efeee8;
+  border-radius: 8rpx;
+  padding: 28rpx 24rpx;
+  margin: 26rpx 0;
+}
+
+.risk-score {
+  font-size: 56rpx;
+  font-weight: 500;
+  color: #a83d30;
+}
+
+.risk-max {
+  font-size: 28rpx;
+  color: #66695f;
+}
+
+.risk-status {
+  font-size: 34rpx;
+  color: #a83d30;
+}
+
+.risk-reason {
+  font-size: 26rpx;
+  line-height: 1.7;
+  color: #4b4d45;
+  margin-top: 12rpx;
+}
+
+.risk-dim {
+  margin-top: 26rpx;
+}
+
+.risk-dim-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12rpx;
+  font-size: 25rpx;
+  color: #292b25;
+}
+
+.risk-bar {
+  height: 10rpx;
+  background: #dedfd6;
+  border-radius: 5rpx;
+  margin: 12rpx 0;
+  overflow: hidden;
+}
+
+.risk-bar-fill {
+  height: 10rpx;
+  background: #a83d30;
+}
+
+.risk-dim-reason {
+  font-size: 24rpx;
+  line-height: 1.65;
+  color: #66695f;
+}
+
+.consequences {
+  margin-top: 26rpx;
+}
+
+.consequence {
+  margin-top: 12rpx;
+}
+
+.consequence-label {
+  font-size: 24rpx;
+  color: #a83d30;
+}
+
+.consequence-value {
+  display: block;
+  font-size: 25rpx;
+  line-height: 1.65;
+  color: #4b4d45;
+}
+
+.evidence-sources {
+  margin-top: 26rpx;
+}
+
+.evidence-head {
+  font-size: 25rpx;
+  color: #292b25;
+}
+
+.evidence-source {
+  padding: 12rpx 0;
+}
+
+.risk-meta, .disclaimer {
+  font-size: 21rpx;
+  line-height: 1.7;
+  color: #8a8b82;
+  margin-top: 20rpx;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+  padding: 14rpx 0;
+  border-bottom: 1rpx solid #e6e6de;
+}
+
+.info-label {
+  font-size: 24rpx;
+  color: #8a8b82;
+  flex: none;
+}
+
+.info-value {
+  font-size: 24rpx;
+  color: #4b4d45;
+  text-align: right;
+}
+
+.related {
+  font-size: 26rpx;
+  line-height: 1.6;
+  color: #a83d30;
+  padding: 14rpx 0;
+}
+
+.site-footer {
+  padding: 40rpx 0 20rpx;
+  font-size: 21rpx;
+  line-height: 1.7;
+  color: #8a8b82;
+  text-align: center;
+}

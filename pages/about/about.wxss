@@ -1,0 +1,46 @@
+.page-title {
+  font-size: 44rpx;
+  font-weight: 500;
+  padding: 30rpx 0 20rpx;
+}
+
+.section {
+  padding: 26rpx 0;
+  border-bottom: 1rpx solid #dedfd6;
+}
+
+.section-title {
+  font-size: 29rpx;
+  font-weight: 500;
+  color: #292b25;
+  margin-bottom: 14rpx;
+}
+
+.body {
+  font-size: 25rpx;
+  line-height: 1.8;
+  color: #4b4d45;
+  margin-top: 8rpx;
+}
+
+.kv {
+  display: flex;
+  justify-content: space-between;
+  font-size: 25rpx;
+  color: #66695f;
+  padding: 8rpx 0;
+}
+
+.link {
+  font-size: 25rpx;
+  color: #a83d30;
+  margin-top: 14rpx;
+}
+
+.site-footer {
+  padding: 40rpx 0 20rpx;
+  font-size: 21rpx;
+  line-height: 1.7;
+  color: #8a8b82;
+  text-align: center;
+}

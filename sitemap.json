@@ -1,0 +1,9 @@
+{
+  "desc": "复旦 JADE · AI 安全观察小程序站点地图",
+  "rules": [
+    {
+      "action": "allow",
+      "page": "*"
+    }
+  ]
+}

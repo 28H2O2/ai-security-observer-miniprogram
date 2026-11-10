@@ -1,0 +1,128 @@
+<view class="page-shell">
+  <view wx:if="{{viewState === 'loading'}}" class="state-card">
+    <text class="state-title">正在载入详情…</text>
+  </view>
+
+  <view wx:elif="{{viewState === 'notfound'}}" class="state-card">
+    <text class="state-title">没有找到这条资料</text>
+    <view class="outline-button" bindtap="goBack">返回列表</view>
+  </view>
+
+  <block wx:else>
+    <view class="back-row">
+      <view class="back-link" bindtap="goBack">← 返回列表</view>
+      <view class="back-actions">
+        <view class="back-link" bindtap="copyPage">复制页面路径</view>
+        <view class="back-link" bindtap="copyMarkdown">复制 Markdown</view>
+      </view>
+    </view>
+
+    <view class="detail-meta">
+      <text class="kind kind-{{detail.kind}}">{{detail.kindLabel}}</text>
+      <text class="meta-source">{{detail.sourceName}}</text>
+      <text class="meta-date">{{detail.dateText}}</text>
+    </view>
+
+    <view class="detail-title">{{detail.title}}</view>
+
+    <view class="detail-tags">
+      <text wx:for="{{detail.tags}}" wx:for-item="tag" wx:key="*this" class="tag">{{tag}}</text>
+    </view>
+    <view wx:if="{{detail.hasIdentifiers}}" class="detail-id">
+      <text wx:for="{{detail.identifiers}}" wx:for-item="code" wx:key="*this">{{code}} </text>
+    </view>
+
+    <view class="detail-section source-section">
+      <view class="section-head"><text>原始来源</text></view>
+      <view wx:if="{{detail.hasReferences}}">
+        <view wx:for="{{detail.references}}" wx:for-item="ref" wx:key="url" class="reference" bindtap="copyUrl" data-url="{{ref.url}}">
+          <text class="reference-label">{{ref.label}}</text>
+          <text class="reference-host">{{ref.hostname}} · 点击复制链接</text>
+        </view>
+      </view>
+      <view wx:else class="muted">PDF 汇编未附公开原始链接，原文待补。</view>
+      <view wx:if="{{detail.pdfReference}}" class="pdf-reference">{{detail.pdfReference}}</view>
+    </view>
+
+    <view class="detail-deck">{{detail.summary}}</view>
+
+    <view wx:if="{{detail.hasPackages}}" class="detail-section">
+      <view class="section-head"><text>受影响版本与修复</text></view>
+      <view wx:for="{{detail.packages}}" wx:for-item="pkg" wx:key="name" class="package">
+        <view class="package-name">{{pkg.name}} · {{pkg.ecosystem}}</view>
+        <view class="package-line">受影响版本：{{pkg.affectedRange}}</view>
+        <view class="package-line">修复版本：{{pkg.fixedVersion}}</view>
+      </view>
+    </view>
+
+    <view wx:if="{{detail.hasPreconditions}}" class="detail-section">
+      <view class="section-head"><text>利用条件</text></view>
+      <view wx:for="{{detail.preconditions}}" wx:for-item="condition" wx:key="*this" class="bullet">· {{condition}}</view>
+    </view>
+
+    <view wx:if="{{detail.risk}}" class="risk-card">
+      <view class="section-head">
+        <text>安全风险评估</text>
+        <text class="text-link" bindtap="goRules">评分规则</text>
+      </view>
+      <view wx:if="{{detail.risk.hasScore}}" class="risk-score">ASO {{detail.risk.score}}<text class="risk-max">/{{detail.risk.max}}</text></view>
+      <view wx:else class="risk-status">{{detail.risk.statusText}}</view>
+      <view class="risk-reason">{{detail.risk.reason}}</view>
+      <view wx:if="{{detail.risk.hasDimensions}}">
+        <view wx:for="{{detail.risk.dimensions}}" wx:for-item="dim" wx:key="key" class="risk-dim">
+          <view class="risk-dim-head">
+            <text>{{dim.key}} · {{dim.name}}</text>
+            <text>{{dim.valueText}} {{dim.contribution}}</text>
+          </view>
+          <view class="risk-bar"><view class="risk-bar-fill" style="width:{{dim.percent}}%"></view></view>
+          <view class="risk-dim-reason">{{dim.reason}}</view>
+        </view>
+      </view>
+      <view wx:if="{{detail.risk.hasConsequences}}" class="consequences">
+        <view wx:for="{{detail.risk.consequences}}" wx:for-item="entry" wx:key="label" class="consequence">
+          <text class="consequence-label">{{entry.label}}</text>
+          <text class="consequence-value">{{entry.value}}</text>
+        </view>
+      </view>
+      <view wx:if="{{detail.risk.hasEvidenceSources}}" class="evidence-sources">
+        <view class="evidence-head">原始证据</view>
+        <view wx:for="{{detail.risk.evidenceSources}}" wx:for-item="source" wx:key="label" class="evidence-source" bindtap="copyUrl" data-url="{{source.url}}">
+          <text class="reference-label">{{source.label}}</text>
+          <text class="reference-host">{{source.locator}} · 读取于 {{source.accessedAt}}</text>
+        </view>
+      </view>
+      <view class="risk-meta">证据可信度：{{detail.risk.confidence}} · 评估于 {{detail.risk.assessedAt}} · {{detail.risk.reviewedText}} · {{detail.risk.ruleVersion}}</view>
+      <view class="disclaimer">ASO 自定义指标，非 CVSS、EPSS 或攻击概率。</view>
+    </view>
+
+    <view class="detail-section evidence-box">
+      <view class="section-head"><text>证据与边界</text></view>
+      <view class="section-body">{{detail.limitations}}</view>
+    </view>
+
+    <view wx:if="{{detail.hasImpact}}" class="detail-section">
+      <view class="section-head"><text>已披露的影响</text></view>
+      <view class="section-body">{{detail.impact}}</view>
+    </view>
+
+    <view wx:if="{{detail.hasRecommendation}}" class="detail-section">
+      <view class="section-head"><text>处置与关注</text></view>
+      <view class="section-body">{{detail.recommendation}}</view>
+    </view>
+
+    <view class="detail-section">
+      <view class="section-head"><text>资料信息</text></view>
+      <view wx:for="{{detail.infoRows}}" wx:for-item="row" wx:key="label" class="info-row">
+        <text class="info-label">{{row.label}}</text>
+        <text class="info-value">{{row.value}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{detail.hasRelated}}" class="detail-section">
+      <view class="section-head"><text>相关情报</text></view>
+      <view wx:for="{{detail.related}}" wx:for-item="rel" wx:key="id" class="related" bindtap="openRelated" data-id="{{rel.id}}">{{rel.title}} →</view>
+    </view>
+
+    <view class="site-footer">原始来源版权归原作者；本站摘要为独立整理，不分发第三方全文。</view>
+  </block>
+</view>

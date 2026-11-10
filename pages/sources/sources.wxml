@@ -1,0 +1,48 @@
+<view class="page-shell">
+  <view class="page-title">来源库</view>
+  <view class="intro">共 {{total}} 个公开来源，按分类整理。关系图在小程序中改为分类列表。</view>
+
+  <view class="search-box">
+    <input class="search-input" value="{{q}}" bindinput="onSearch" confirm-type="search" placeholder="搜索来源或分类…" placeholder-class="placeholder" />
+  </view>
+  <view class="search-count">找到 {{count}} 个来源</view>
+
+  <view wx:if="{{count === 0}}" class="state-card">
+    <text class="state-title">没有匹配来源</text>
+    <view class="outline-button" bindtap="clearSearch">清空搜索</view>
+  </view>
+
+  <view wx:for="{{groups}}" wx:key="id" wx:for-item="group" class="source-group">
+    <view class="group-head">
+      <text>{{group.label}}</text>
+      <text class="group-count">{{group.sources.length}} 个</text>
+    </view>
+    <view class="source-nodes">
+      <view wx:for="{{group.sources}}" wx:for-item="source" wx:key="id" class="source-node" data-id="{{source.id}}" bindtap="onSelect">
+        <text class="source-name">{{source.label}}</text>
+        <text class="source-count">{{source.count}} 条</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{selected}}" class="source-detail">
+    <view class="detail-head">
+      <view>
+        <view class="method">{{selected.method}}</view>
+        <view class="detail-title">{{selected.name}}</view>
+      </view>
+      <view class="close" bindtap="closeDetail">关闭</view>
+    </view>
+    <view class="description">{{selected.description}}</view>
+    <view class="detail-links">
+      <view wx:if="{{selected.url}}" class="detail-link" bindtap="copyUrl" data-url="{{selected.url}}">复制来源主页链接</view>
+      <view wx:if="{{selected.endpoint}}" class="detail-link" bindtap="copyUrl" data-url="{{selected.endpoint}}">复制获取入口链接</view>
+      <view class="detail-link" bindtap="viewItems" data-id="{{selected.id}}">查看已收录 {{selected.count}} 条 →</view>
+    </view>
+    <view class="status">{{selected.statusText}} · {{selected.checkedAt}}</view>
+    <view class="notes-title">接入说明</view>
+    <view class="notes">{{selected.notes}}</view>
+  </view>
+
+  <view class="site-footer">status = checked 仅代表公开入口检查通过，不代表采集器已运行。</view>
+</view>
