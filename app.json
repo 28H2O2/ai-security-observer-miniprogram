@@ -17,14 +17,12 @@
     "backgroundTextStyle": "light"
   },
   "tabBar": {
-    "color": "#66695f",
+    "color": "#8a8b82",
     "selectedColor": "#a83d30",
     "backgroundColor": "#f7f6f2",
     "borderStyle": "white",
     "list": [
       { "pagePath": "pages/index/index", "text": "情报" },
-      { "pagePath": "pages/incidents/incidents", "text": "事件" },
-      { "pagePath": "pages/research/research", "text": "研究" },
       { "pagePath": "pages/briefings/briefings", "text": "简报" },
       { "pagePath": "pages/sources/sources", "text": "来源" }
     ]

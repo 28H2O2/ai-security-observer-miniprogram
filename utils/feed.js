@@ -1,5 +1,6 @@
 // 三个列表页共用的 Page 配置工厂
 // 首页只保留「浏览」能力；搜索与筛选收进品牌行右侧的放大镜 icon，点开浮出卡片
+// 内容类型（全部 / 事件 / 研究）由页内顶部文字切换承担，不再占用底部 tabBar
 // WXML 用到的文案、class 都在这里预计算，模板只保留最简单的变量绑定
 const store = require('./data.js');
 const { filterItems, topics } = require('./model.js');
@@ -7,6 +8,12 @@ const { listToCards } = require('./view.js');
 const { RISK_RULES } = require('./risk-rules.js');
 
 const SUMMARY_LIMIT = 56;
+
+const VIEWS = [
+  { id: 'feed', label: '全部情报' },
+  { id: 'incidents', label: '真实事件' },
+  { id: 'research', label: '研究披露' },
+];
 
 function briefSummary(text) {
   const clean = String(text || '').replace(/\s+/g, ' ').trim();
@@ -19,6 +26,14 @@ function topicItems() {
     label: entry.label,
     active: entry.id === 'all',
     className: 'topic' + (entry.id === 'all' ? ' active' : ''),
+  }));
+}
+
+function viewTabItems(active) {
+  return VIEWS.map(entry => ({
+    id: entry.id,
+    label: entry.label,
+    className: 'view-tab' + (entry.id === active ? ' active' : ''),
   }));
 }
 
@@ -59,7 +74,7 @@ function pickerDefs(view) {
   };
 }
 
-// 有筛选条件时放大镜变朱红；首屏不出现任何搜索/筛选文字
+// 内容类型属于导航而非筛选，不计入放大镜的红色状态
 function activeFilter(filters, defs) {
   if (filters.q || filters.topic !== 'all' || filters.unread) return true;
   return ['source', 'evidence', 'period', 'assessment'].some(key => filters[key] !== defs[key].values[0]);
@@ -76,6 +91,8 @@ function initialData(view, title, defs) {
     total: store.meta.total,
     q: '',
     topic: 'all',
+    contentView: view,
+    viewTabs: viewTabItems(view),
     topicList: topicItems(),
     overlayOpen: false,
     searchIconClass: 'search-icon',
@@ -128,7 +145,7 @@ function create(view, title) {
     currentFilters() {
       const d = this.data;
       return {
-        view,
+        view: d.contentView || view,
         q: d.q,
         source: d.source,
         topic: d.topic,
@@ -148,7 +165,7 @@ function create(view, title) {
         const list = filterItems(store.items, filters, read, store.meta.updatedAt);
         const filterActive = activeFilter(filters, defs);
         this.setData({
-          cards: decorateCards(list, read, filters.sort, view),
+          cards: decorateCards(list, read, filters.sort, filters.view),
           count: list.length,
           resultText: `${list.length} 条结果`,
           doneText: `查看 ${list.length} 条结果`,
@@ -178,6 +195,12 @@ function create(view, title) {
 
     onSearch(event) {
       this.setData({ q: event.detail.value }, () => this.refresh());
+    },
+
+    onView(event) {
+      const value = event.currentTarget.dataset.value;
+      if (value === this.data.contentView) return;
+      this.setData({ contentView: value, viewTabs: viewTabItems(value) }, () => this.refresh());
     },
 
     onTopic(event) {

@@ -30,6 +30,8 @@ function fallbackPage(message) {
       total: ${meta.total},
       q: '',
       topicList: [],
+      contentView: '${view}',
+      viewTabs: [],
       overlayOpen: false,
       searchIconClass: 'search-icon',
       filterActive: false,
@@ -51,6 +53,7 @@ function fallbackPage(message) {
     },
     onLoad() {},
     toggleOverlay() {},
+    onView() {},
   };
 }
 

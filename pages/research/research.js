@@ -7,6 +7,8 @@ function fallbackPage(message) {
       total: 103,
       q: '',
       topicList: [],
+      contentView: 'research',
+      viewTabs: [],
       overlayOpen: false,
       searchIconClass: 'search-icon',
       filterActive: false,
@@ -28,6 +30,7 @@ function fallbackPage(message) {
     },
     onLoad() {},
     toggleOverlay() {},
+    onView() {},
   };
 }
 

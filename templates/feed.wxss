@@ -71,6 +71,26 @@
   background: #a83d30;
 }
 
+/* 内容类型切换：从底部 tab 上移到页内，只用文字 + 选中下划线，不占主空间 */
+.view-row {
+  display: flex;
+  align-items: center;
+  gap: 36rpx;
+  margin: 18rpx 0 2rpx;
+}
+
+.view-tab {
+  font-size: 26rpx;
+  color: #8a8b82;
+  padding: 6rpx 0 10rpx;
+}
+
+.view-tab.active {
+  color: #a83d30;
+  font-weight: 500;
+  border-bottom: 3rpx solid #a83d30;
+}
+
 /* 主题：换行排列，不再横向滚动（避免预览里的滚动条）；
    选中态只用朱红边框与文字，不铺色块 */
 .topic-row {

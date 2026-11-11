@@ -11,6 +11,10 @@
     </view>
   </view>
 
+  <view class="view-row">
+    <view wx:for="{{viewTabs}}" wx:key="id" class="{{item.className}}" data-value="{{item.id}}" bindtap="onView">{{item.label}}</view>
+  </view>
+
   <view class="topic-row">
     <view wx:for="{{topicList}}" wx:key="id" class="{{item.className}}" data-value="{{item.id}}" bindtap="onTopic">{{item.label}}</view>
   </view>
