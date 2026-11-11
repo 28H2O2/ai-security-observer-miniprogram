@@ -85,6 +85,6 @@ Page({
   },
 
   onShareAppMessage() {
-    return { title: '复旦 JADE · AI 安全观察 来源库', path: '/pages/sources/sources' };
+    return { title: '复旦 JADE · AI 威胁情报站 来源库', path: '/pages/sources/sources' };
   },
 });

@@ -76,7 +76,7 @@ function itemMarkdown(item) {
 
 function exportMarkdown(list, meta) {
   return [
-    '# 复旦 JADE · AI 安全观察', '',
+    '# 复旦 JADE · AI 威胁情报站', '',
     `当前筛选结果 · ${list.length} 条`, '',
     `按已收录资料汇编 · 资料更新：${meta.updatedAt} · 人工整理，非实时核验`, '',
     ...list.map(itemMarkdown),

@@ -56,7 +56,7 @@ Page({
   onShareAppMessage() {
     const detail = this.data.detail;
     return {
-      title: detail ? detail.title : 'AI 安全观察',
+      title: detail ? detail.title : 'AI 威胁情报站',
       path: `/pages/item/item?id=${encodeURIComponent(detail ? detail.id : '')}`,
     };
   },

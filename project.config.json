@@ -1,5 +1,5 @@
 {
-  "description": "复旦 JADE · AI 安全观察（本地静态数据小程序）",
+  "description": "复旦 JADE · AI 威胁情报站（本地静态数据小程序）",
   "packOptions": {
     "ignore": [
       { "type": "folder", "value": ".workbuddy" },

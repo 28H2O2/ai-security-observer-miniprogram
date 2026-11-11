@@ -2,7 +2,7 @@
   <view class="masthead">
     <image class="jade-logo" src="/assets/jade-logo.png" mode="aspectFit"></image>
     <view class="brand-copy">
-      <view class="site-title">AI 安全观察</view>
+      <view class="site-title">AI 威胁情报站</view>
       <view class="snapshot">{{total}} 条 · 资料更新 {{updatedAt}}</view>
     </view>
     <view class="{{searchIconClass}}" bindtap="toggleOverlay">

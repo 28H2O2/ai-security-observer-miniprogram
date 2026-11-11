@@ -8,7 +8,7 @@ try {
 
 App({
   globalData: {
-    siteName: '复旦 JADE · AI 安全观察',
+    siteName: '复旦 JADE · AI 威胁情报站',
     updatedAt: meta.updatedAt,
     total: meta.total,
     pendingFilter: null,

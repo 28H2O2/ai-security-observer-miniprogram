@@ -251,7 +251,7 @@ function create(view, title) {
 
     onShareAppMessage() {
       return {
-        title: `复旦 JADE · AI 安全观察（${store.meta.updatedAt} 资料快照）`,
+        title: `复旦 JADE · AI 威胁情报站（${store.meta.updatedAt} 资料快照）`,
         path: '/pages/index/index',
       };
     },

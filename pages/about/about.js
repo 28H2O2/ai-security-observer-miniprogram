@@ -18,6 +18,6 @@ Page({
   },
 
   onShareAppMessage() {
-    return { title: '复旦 JADE · AI 安全观察', path: '/pages/index/index' };
+    return { title: '复旦 JADE · AI 威胁情报站', path: '/pages/index/index' };
   },
 });
