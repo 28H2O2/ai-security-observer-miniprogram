@@ -32,69 +32,42 @@
   margin-top: 6rpx;
 }
 
-/* 搜索：白底细边框。筛选入口并入同一行，不单独占工具栏 */
-.search-box {
-  background: #ffffff;
-  border: 1rpx solid #dedfd6;
-  border-radius: 8rpx;
-  padding: 0 20rpx;
-  height: 72rpx;
-  display: flex;
-  align-items: center;
-  margin-top: 20rpx;
-}
-
-.search-input {
-  flex: 1;
-  min-width: 0;
-  font-size: 26rpx;
-  color: #292b25;
-}
-
-.placeholder {
-  color: #8a8b82;
-}
-
-/* 筛选入口收缩为中性灰滑块 icon：无文字、无分隔线、不占主位置。
-   仅在面板展开或已有筛选条件时变朱红（当前选中 / 可点击语义） */
-.filter-icon {
+/* 搜索与筛选收进品牌行右侧的放大镜 icon：默认中性灰，
+   浮层打开或已有筛选条件时变朱红（当前选中 / 可点击语义） */
+.search-icon {
+  position: relative;
   flex: none;
-  align-self: stretch;
-  width: 56rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 7rpx;
+  margin-left: auto;
+  width: 64rpx;
+  height: 72rpx;
 }
 
-.icon-track {
-  width: 32rpx;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.icon-bar {
-  width: 16rpx;
-  height: 2rpx;
-  background: #8a8b82;
-}
-
-.icon-knob {
-  width: 9rpx;
-  height: 9rpx;
-  border: 2rpx solid #8a8b82;
+.search-lens {
+  position: absolute;
+  top: 22rpx;
+  left: 18rpx;
+  width: 22rpx;
+  height: 22rpx;
+  border: 3rpx solid #8a8b82;
   border-radius: 50%;
   box-sizing: border-box;
 }
 
-.filter-icon.is-active .icon-bar {
-  background: #a83d30;
+.search-handle {
+  position: absolute;
+  top: 42rpx;
+  left: 37rpx;
+  width: 14rpx;
+  height: 3rpx;
+  background: #8a8b82;
+  transform: rotate(45deg);
 }
 
-.filter-icon.is-active .icon-knob {
+.search-icon.is-active .search-lens {
   border-color: #a83d30;
+}
+
+.search-icon.is-active .search-handle {
   background: #a83d30;
 }
 
@@ -124,14 +97,57 @@
   font-weight: 500;
 }
 
-/* 结果条数只在展开筛选面板时出现 */
-.filter-panel {
-  background: #efeee8;
-  border-radius: 8rpx;
-  padding: 8rpx 20rpx 20rpx;
-  margin-bottom: 12rpx;
+/* 点击 icon 后浮出的卡片：白底 + 细边框 + 淡阴影，不占首屏 */
+.filter-sheet {
+  background: #ffffff;
+  border: 1rpx solid #dedfd6;
+  border-radius: 10rpx;
+  box-shadow: 0 6rpx 20rpx #dedfd6;
+  padding: 20rpx 24rpx 24rpx;
+  margin: 4rpx 0 20rpx;
 }
 
+.sheet-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18rpx;
+}
+
+.sheet-title {
+  font-size: 27rpx;
+  font-weight: 500;
+  color: #292b25;
+}
+
+.sheet-close {
+  font-size: 23rpx;
+  color: #a83d30;
+  padding: 6rpx 0 6rpx 20rpx;
+}
+
+.sheet-search {
+  background: #f7f6f2;
+  border: 1rpx solid #dedfd6;
+  border-radius: 8rpx;
+  padding: 0 20rpx;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 0;
+  font-size: 26rpx;
+  color: #292b25;
+}
+
+.placeholder {
+  color: #8a8b82;
+}
+
+/* 结果条数只在浮层内出现 */
 .filter-summary {
   font-size: 21rpx;
   color: #8a8b82;
@@ -154,14 +170,28 @@
   text-align: right;
 }
 
-.filter-reset {
-  margin-top: 16rpx;
+.sheet-actions {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 20rpx;
+}
+
+.sheet-reset, .sheet-done {
+  flex: 1;
   text-align: center;
   font-size: 24rpx;
-  color: #5c5f56;
-  padding: 14rpx;
-  border: 1rpx solid #dedfd6;
+  padding: 16rpx 0;
   border-radius: 6rpx;
+  border: 1rpx solid #dedfd6;
+}
+
+.sheet-reset {
+  color: #5c5f56;
+}
+
+.sheet-done {
+  color: #a83d30;
+  border-color: #a83d30;
 }
 
 .state-card {

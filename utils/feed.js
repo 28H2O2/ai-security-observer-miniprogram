@@ -1,5 +1,5 @@
 // 三个列表页共用的 Page 配置工厂
-// 首页只保留「浏览」能力；导出、说明类入口移到详情页与来源页
+// 首页只保留「浏览」能力；搜索与筛选收进品牌行右侧的放大镜 icon，点开浮出卡片
 // WXML 用到的文案、class 都在这里预计算，模板只保留最简单的变量绑定
 const store = require('./data.js');
 const { filterItems, topics } = require('./model.js');
@@ -59,14 +59,14 @@ function pickerDefs(view) {
   };
 }
 
-// 有筛选条件时，搜索框右侧图标变朱红；首屏不出现文字提示
+// 有筛选条件时放大镜变朱红；首屏不出现任何搜索/筛选文字
 function activeFilter(filters, defs) {
   if (filters.q || filters.topic !== 'all' || filters.unread) return true;
   return ['source', 'evidence', 'period', 'assessment'].some(key => filters[key] !== defs[key].values[0]);
 }
 
-function iconClass(filterOpen, filterActive) {
-  return 'filter-icon' + (filterOpen || filterActive ? ' is-active' : '');
+function searchIconClass(overlayOpen, filterActive) {
+  return 'search-icon' + (overlayOpen || filterActive ? ' is-active' : '');
 }
 
 function initialData(view, title, defs) {
@@ -77,13 +77,14 @@ function initialData(view, title, defs) {
     q: '',
     topic: 'all',
     topicList: topicItems(),
-    filterOpen: false,
-    filterIconClass: 'filter-icon',
+    overlayOpen: false,
+    searchIconClass: 'search-icon',
     filterActive: false,
     unread: false,
     cards: [],
     count: 0,
     resultText: '0 条结果',
+    doneText: '查看 0 条结果',
     loading: true,
     ready: false,
     emptyState: false,
@@ -150,8 +151,9 @@ function create(view, title) {
           cards: decorateCards(list, read, filters.sort, view),
           count: list.length,
           resultText: `${list.length} 条结果`,
+          doneText: `查看 ${list.length} 条结果`,
           filterActive,
-          filterIconClass: iconClass(this.data.filterOpen, filterActive),
+          searchIconClass: searchIconClass(this.data.overlayOpen, filterActive),
           loading: false,
           ready: list.length > 0,
           emptyState: list.length === 0,
@@ -187,11 +189,11 @@ function create(view, title) {
       this.setData({ topic: value, topicList }, () => this.refresh());
     },
 
-    toggleFilter() {
-      const filterOpen = !this.data.filterOpen;
+    toggleOverlay() {
+      const overlayOpen = !this.data.overlayOpen;
       this.setData({
-        filterOpen,
-        filterIconClass: iconClass(filterOpen, this.data.filterActive),
+        overlayOpen,
+        searchIconClass: searchIconClass(overlayOpen, this.data.filterActive),
       });
     },
 

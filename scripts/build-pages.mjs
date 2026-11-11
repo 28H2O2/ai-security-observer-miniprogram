@@ -30,13 +30,14 @@ function fallbackPage(message) {
       total: ${meta.total},
       q: '',
       topicList: [],
-      filterOpen: false,
-      filterIconClass: 'filter-icon',
+      overlayOpen: false,
+      searchIconClass: 'search-icon',
       filterActive: false,
       unread: false,
       cards: [],
       count: 0,
       resultText: '0 条结果',
+      doneText: '查看 0 条结果',
       loading: false,
       ready: false,
       emptyState: false,
@@ -49,6 +50,7 @@ function fallbackPage(message) {
       sortLabels: [],
     },
     onLoad() {},
+    toggleOverlay() {},
   };
 }
 
