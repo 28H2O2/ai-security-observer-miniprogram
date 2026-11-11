@@ -9,8 +9,11 @@
 
   <view class="search-box">
     <input class="search-input" value="{{q}}" bindinput="onSearch" confirm-type="search" placeholder="搜索情报或 CVE 编号" placeholder-class="placeholder" />
-    <view wx:if="{{filterActive}}" class="filter-dot"></view>
-    <text class="filter-entry" bindtap="toggleFilter">{{filterHint}}</text>
+    <view class="{{filterIconClass}}" bindtap="toggleFilter">
+      <view class="icon-track"><view class="icon-knob"></view><view class="icon-bar"></view></view>
+      <view class="icon-track"><view class="icon-bar"></view><view class="icon-knob"></view></view>
+      <view class="icon-track"><view class="icon-knob"></view><view class="icon-bar"></view></view>
+    </view>
   </view>
 
   <view class="topic-row">

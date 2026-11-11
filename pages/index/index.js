@@ -8,7 +8,7 @@ function fallbackPage(message) {
       q: '',
       topicList: [],
       filterOpen: false,
-      filterHint: '筛选',
+      filterIconClass: 'filter-icon',
       filterActive: false,
       unread: false,
       cards: [],

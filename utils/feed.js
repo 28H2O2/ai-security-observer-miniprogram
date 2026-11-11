@@ -59,10 +59,14 @@ function pickerDefs(view) {
   };
 }
 
-// 有筛选条件时，搜索框右侧显示一个朱红小圆点，不再单独占一行结果栏
+// 有筛选条件时，搜索框右侧图标变朱红；首屏不出现文字提示
 function activeFilter(filters, defs) {
   if (filters.q || filters.topic !== 'all' || filters.unread) return true;
   return ['source', 'evidence', 'period', 'assessment'].some(key => filters[key] !== defs[key].values[0]);
+}
+
+function iconClass(filterOpen, filterActive) {
+  return 'filter-icon' + (filterOpen || filterActive ? ' is-active' : '');
 }
 
 function initialData(view, title, defs) {
@@ -74,7 +78,7 @@ function initialData(view, title, defs) {
     topic: 'all',
     topicList: topicItems(),
     filterOpen: false,
-    filterHint: '筛选',
+    filterIconClass: 'filter-icon',
     filterActive: false,
     unread: false,
     cards: [],
@@ -141,11 +145,13 @@ function create(view, title) {
         const filters = this.currentFilters();
         const read = store.loadRead();
         const list = filterItems(store.items, filters, read, store.meta.updatedAt);
+        const filterActive = activeFilter(filters, defs);
         this.setData({
           cards: decorateCards(list, read, filters.sort, view),
           count: list.length,
           resultText: `${list.length} 条结果`,
-          filterActive: activeFilter(filters, defs),
+          filterActive,
+          filterIconClass: iconClass(this.data.filterOpen, filterActive),
           loading: false,
           ready: list.length > 0,
           emptyState: list.length === 0,
@@ -183,7 +189,10 @@ function create(view, title) {
 
     toggleFilter() {
       const filterOpen = !this.data.filterOpen;
-      this.setData({ filterOpen, filterHint: filterOpen ? '收起' : '筛选' });
+      this.setData({
+        filterOpen,
+        filterIconClass: iconClass(filterOpen, this.data.filterActive),
+      });
     },
 
     onPicker(event) {
