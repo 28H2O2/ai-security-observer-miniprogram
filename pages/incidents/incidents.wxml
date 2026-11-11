@@ -64,7 +64,7 @@
       </view>
       <view class="{{card.itemClass}}" bindtap="openItem" data-id="{{card.id}}">
         <view class="article-meta">
-          <text class="{{card.kindClass}}">{{card.kindLabel}}</text>
+          <text wx:if="{{card.showKind}}" class="{{card.kindClass}}">{{card.kindLabel}}</text>
           <text class="meta-source">{{card.sourceName}}</text>
           <text wx:if="{{card.showDate}}" class="meta-date">{{card.dateText}}</text>
           <text wx:if="{{card.asoText}}" class="{{card.asoClassName}}">{{card.asoText}}</text>

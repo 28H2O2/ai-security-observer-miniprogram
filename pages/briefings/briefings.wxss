@@ -17,7 +17,7 @@
 .intro {
   font-size: 26rpx;
   line-height: 1.7;
-  color: #66695f;
+  color: #5c5f56;
   margin-top: 12rpx;
 }
 
@@ -34,8 +34,8 @@
 .mode {
   padding: 12rpx 28rpx;
   border-radius: 6rpx;
-  background: #edeee7;
-  color: #66695f;
+  background: #efeee8;
+  color: #5c5f56;
   font-size: 26rpx;
 }
 
@@ -48,7 +48,7 @@
   font-size: 26rpx;
   color: #292b25;
   padding: 18rpx 20rpx;
-  background: #edeee7;
+  background: #efeee8;
   border-radius: 6rpx;
 }
 
@@ -75,14 +75,14 @@
   gap: 6rpx;
   padding: 14rpx 22rpx;
   margin-right: 12rpx;
-  background: #edeee7;
+  background: #efeee8;
   border-radius: 6rpx;
   font-size: 23rpx;
-  color: #66695f;
+  color: #5c5f56;
 }
 
 .archive-item.active {
-  background: #efe4dd;
+  background: #efeee8;
   color: #a83d30;
 }
 
@@ -103,7 +103,7 @@
 .state-description {
   display: block;
   font-size: 24rpx;
-  color: #66695f;
+  color: #5c5f56;
   margin-top: 12rpx;
 }
 
@@ -175,7 +175,7 @@
 .briefing-item-summary {
   font-size: 26rpx;
   line-height: 1.7;
-  color: #4b4d45;
+  color: #5c5f56;
   margin-top: 10rpx;
 }
 

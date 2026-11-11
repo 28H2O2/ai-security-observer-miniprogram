@@ -44,20 +44,22 @@
   margin-top: 28rpx;
 }
 
+/* 类型标签：默认中性，朱红只表示「真实发生的攻击事件」 */
 .kind {
   font-size: 21rpx;
   padding: 4rpx 12rpx;
   border-radius: 4rpx;
-  color: #ffffff;
+  background: #efeee8;
+  color: #292b25;
+  border: 1rpx solid #dedfd6;
 }
 
-.kind-incident { background: #a83d30; }
-.kind-advisory { background: #a9761c; }
-.kind-research { background: #4f6546; }
+.kind-incident { background: #a83d30; color: #ffffff; border-color: #a83d30; }
+.kind-advisory, .kind-research { background: #efeee8; color: #292b25; }
 
 .meta-source, .meta-date {
   font-size: 22rpx;
-  color: #66695f;
+  color: #5c5f56;
 }
 
 .detail-title {
@@ -75,8 +77,8 @@
 
 .tag {
   font-size: 21rpx;
-  color: #66695f;
-  background: #edeee7;
+  color: #5c5f56;
+  background: #efeee8;
   border-radius: 20rpx;
   padding: 4rpx 14rpx;
 }
@@ -110,7 +112,7 @@
 
 .reference {
   padding: 16rpx 0;
-  border-bottom: 1rpx solid #e6e6de;
+  border-bottom: 1rpx solid #dedfd6;
 }
 
 .reference-label {
@@ -129,7 +131,7 @@
 
 .muted, .pdf-reference {
   font-size: 23rpx;
-  color: #66695f;
+  color: #5c5f56;
   line-height: 1.6;
 }
 
@@ -148,7 +150,7 @@
 .section-body {
   font-size: 28rpx;
   line-height: 1.75;
-  color: #4b4d45;
+  color: #5c5f56;
 }
 
 .package {
@@ -163,7 +165,7 @@
 .package-line, .bullet {
   font-size: 25rpx;
   line-height: 1.7;
-  color: #66695f;
+  color: #5c5f56;
 }
 
 .evidence-box {
@@ -189,7 +191,7 @@
 
 .risk-max {
   font-size: 28rpx;
-  color: #66695f;
+  color: #5c5f56;
 }
 
 .risk-status {
@@ -200,7 +202,7 @@
 .risk-reason {
   font-size: 26rpx;
   line-height: 1.7;
-  color: #4b4d45;
+  color: #5c5f56;
   margin-top: 12rpx;
 }
 
@@ -232,7 +234,7 @@
 .risk-dim-reason {
   font-size: 24rpx;
   line-height: 1.65;
-  color: #66695f;
+  color: #5c5f56;
 }
 
 .consequences {
@@ -252,7 +254,7 @@
   display: block;
   font-size: 25rpx;
   line-height: 1.65;
-  color: #4b4d45;
+  color: #5c5f56;
 }
 
 .evidence-sources {
@@ -280,7 +282,7 @@
   justify-content: space-between;
   gap: 20rpx;
   padding: 14rpx 0;
-  border-bottom: 1rpx solid #e6e6de;
+  border-bottom: 1rpx solid #dedfd6;
 }
 
 .info-label {
@@ -291,7 +293,7 @@
 
 .info-value {
   font-size: 24rpx;
-  color: #4b4d45;
+  color: #5c5f56;
   text-align: right;
 }
 

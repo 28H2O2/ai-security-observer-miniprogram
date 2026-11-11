@@ -19,7 +19,7 @@
 
 .formula-label {
   font-size: 22rpx;
-  color: #66695f;
+  color: #5c5f56;
 }
 
 .formula {
@@ -35,17 +35,18 @@
   margin-top: 18rpx;
 }
 
+/* 权重标签：默认中性，朱红只保留给重点维度 */
 .weight {
   font-size: 20rpx;
-  color: #ffffff;
+  color: #292b25;
+  background: #efeee8;
+  border: 1rpx solid #dedfd6;
   padding: 6rpx 14rpx;
   border-radius: 4rpx;
 }
 
-.weight-red { background: #a83d30; }
-.weight-amber { background: #a9761c; }
-.weight-teal { background: #4f6546; }
-.weight-indigo { background: #3f4f80; }
+.weight-red { background: #a83d30; color: #ffffff; border-color: #a83d30; }
+.weight-amber, .weight-teal, .weight-indigo { background: #efeee8; color: #292b25; }
 
 .dimension-card {
   border-radius: 12rpx;
@@ -55,9 +56,7 @@
 }
 
 .dimension-red { border-left: 8rpx solid #a83d30; }
-.dimension-amber { border-left: 8rpx solid #a9761c; }
-.dimension-teal { border-left: 8rpx solid #4f6546; }
-.dimension-indigo { border-left: 8rpx solid #3f4f80; }
+.dimension-amber, .dimension-teal, .dimension-indigo { border-left: 8rpx solid #dedfd6; }
 
 .dimension-name {
   font-size: 30rpx;
@@ -75,7 +74,7 @@
   gap: 16rpx;
   align-items: flex-start;
   padding: 12rpx 0;
-  border-top: 1rpx solid #eeefe8;
+  border-top: 1rpx solid #efeee8;
 }
 
 .anchor-level {
@@ -85,15 +84,15 @@
   line-height: 36rpx;
   text-align: center;
   border-radius: 18rpx;
-  background: #edeee7;
+  background: #efeee8;
   font-size: 21rpx;
-  color: #66695f;
+  color: #5c5f56;
 }
 
 .anchor-text {
   font-size: 24rpx;
   line-height: 1.6;
-  color: #4b4d45;
+  color: #5c5f56;
 }
 
 .status-card, .disclaimer {
@@ -113,7 +112,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 25rpx;
-  color: #4b4d45;
+  color: #5c5f56;
   padding: 10rpx 0;
 }
 
@@ -124,7 +123,7 @@
 .disclaimer-text {
   font-size: 24rpx;
   line-height: 1.75;
-  color: #66695f;
+  color: #5c5f56;
 }
 
 .outline-button {

@@ -19,7 +19,7 @@
 .body {
   font-size: 25rpx;
   line-height: 1.8;
-  color: #4b4d45;
+  color: #5c5f56;
   margin-top: 8rpx;
 }
 
@@ -27,7 +27,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 25rpx;
-  color: #66695f;
+  color: #5c5f56;
   padding: 8rpx 0;
 }
 

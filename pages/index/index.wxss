@@ -1,13 +1,17 @@
+/* 列表页样式：调色板与语义规则见 app.wxss 顶部注释
+   全工程只有一个强调色（朱红），其余均为纸色灰阶 */
+
 .masthead {
   display: flex;
   align-items: center;
-  gap: 16rpx;
-  padding: 24rpx 0 18rpx;
+  gap: 20rpx;
+  padding: 24rpx 0 20rpx;
 }
 
+/* LOGO 放大，作为品牌区视觉重心 */
 .jade-logo {
-  width: 56rpx;
-  height: 68rpx;
+  width: 88rpx;
+  height: 108rpx;
   flex: none;
 }
 
@@ -16,7 +20,7 @@
 }
 
 .site-title {
-  font-size: 34rpx;
+  font-size: 36rpx;
   font-weight: 500;
   line-height: 1.3;
   color: #292b25;
@@ -28,14 +32,16 @@
   margin-top: 6rpx;
 }
 
+/* 搜索：白底细边框，与下方标签拉开层次 */
 .search-box {
-  background: #edeee7;
-  border-radius: 6rpx;
+  background: #ffffff;
+  border: 1rpx solid #dedfd6;
+  border-radius: 8rpx;
   padding: 0 20rpx;
-  height: 68rpx;
+  height: 72rpx;
   display: flex;
   align-items: center;
-  margin-top: 16rpx;
+  margin-top: 20rpx;
 }
 
 .search-input {
@@ -45,45 +51,46 @@
 }
 
 .placeholder {
-  color: #999b92;
+  color: #8a8b82;
 }
 
+/* 主题：换行排列，不再横向滚动（避免预览里的滚动条）；
+   选中态只用朱红边框与文字，不铺色块 */
 .topic-row {
   display: flex;
   flex-direction: row;
-  overflow-x: auto;
-  white-space: nowrap;
-  width: 100%;
-  margin: 16rpx 0 4rpx;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin: 18rpx 0 4rpx;
 }
 
 .topic {
-  display: inline-block;
   flex: none;
-  padding: 10rpx 20rpx;
-  margin-right: 10rpx;
+  padding: 8rpx 18rpx;
+  border: 1rpx solid #dedfd6;
   border-radius: 6rpx;
   font-size: 23rpx;
-  color: #66695f;
-  background: #edeee7;
+  color: #5c5f56;
+  background: #ffffff;
 }
 
 .topic.active {
-  color: #ffffff;
-  background: #a83d30;
+  color: #a83d30;
+  border-color: #a83d30;
+  font-weight: 500;
 }
 
+/* 结果行：靠留白分隔，不额外加横线 */
 .toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18rpx 0;
-  border-bottom: 1rpx solid #dedfd6;
+  padding: 18rpx 0 10rpx;
 }
 
 .result-count {
   font-size: 22rpx;
-  color: #66695f;
+  color: #8a8b82;
 }
 
 .filter-hint {
@@ -117,7 +124,7 @@
   margin-top: 16rpx;
   text-align: center;
   font-size: 24rpx;
-  color: #66695f;
+  color: #5c5f56;
   padding: 14rpx;
   border: 1rpx solid #dedfd6;
   border-radius: 6rpx;
@@ -137,7 +144,7 @@
 .state-description {
   display: block;
   font-size: 24rpx;
-  color: #66695f;
+  color: #8a8b82;
   margin-top: 12rpx;
 }
 
@@ -155,7 +162,7 @@
   display: flex;
   align-items: center;
   gap: 12rpx;
-  padding: 20rpx 0 8rpx;
+  padding: 22rpx 0 8rpx;
 }
 
 .day-text {
@@ -175,7 +182,7 @@
 }
 
 .news-item.is-read .news-title {
-  color: #77796f;
+  color: #8a8b82;
 }
 
 .article-meta {
@@ -186,32 +193,31 @@
   margin-bottom: 10rpx;
 }
 
-.kind {
+/* 类型 / ASO 标签：默认中性灰，朱红只表示「真实事件」与「高风险」 */
+.kind, .aso {
   font-size: 19rpx;
   padding: 3rpx 10rpx;
   border-radius: 4rpx;
-  color: #ffffff;
+  background: #efeee8;
+  color: #5c5f56;
+  border: 1rpx solid #dedfd6;
 }
 
-.kind-incident { background: #a83d30; }
-.kind-advisory { background: #a9761c; }
-.kind-research { background: #4f6546; }
+.kind-incident, .aso-high {
+  background: #a83d30;
+  color: #ffffff;
+  border-color: #a83d30;
+}
+
+.kind-advisory, .kind-research, .aso-mid, .aso-low {
+  background: #efeee8;
+  color: #5c5f56;
+}
 
 .meta-source, .meta-date {
   font-size: 19rpx;
   color: #8a8b82;
 }
-
-.aso {
-  font-size: 19rpx;
-  padding: 3rpx 10rpx;
-  border-radius: 4rpx;
-  color: #ffffff;
-}
-
-.aso-high { background: #a83d30; }
-.aso-mid { background: #a9761c; }
-.aso-low { background: #3c5a80; }
 
 .news-title {
   font-size: 32rpx;
@@ -223,6 +229,6 @@
 .news-summary {
   font-size: 25rpx;
   line-height: 1.55;
-  color: #77796f;
+  color: #5c5f56;
   margin-top: 8rpx;
 }

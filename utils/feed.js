@@ -22,12 +22,14 @@ function topicItems() {
   }));
 }
 
-function decorateCards(list, read, sort) {
+function decorateCards(list, read, sort, view) {
   return listToCards(list, read, sort).map(card => Object.assign({}, card, {
     itemClass: 'news-item' + (card.isRead ? ' is-read' : ''),
     kindClass: 'kind kind-' + card.kind,
     asoClassName: 'aso aso-' + (card.asoClass || 'low'),
     briefSummary: briefSummary(card.summary),
+    // 「真实事件」页整页都是事件，红色标签失去区分意义，故隐藏
+    showKind: view !== 'incidents',
   }));
 }
 
@@ -133,7 +135,7 @@ function create(view, title) {
         const read = store.loadRead();
         const list = filterItems(store.items, filters, read, store.meta.updatedAt);
         this.setData({
-          cards: decorateCards(list, read, filters.sort),
+          cards: decorateCards(list, read, filters.sort, view),
           count: list.length,
           resultText: `${list.length} 条`,
           loading: false,
