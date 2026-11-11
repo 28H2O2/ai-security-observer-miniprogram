@@ -59,6 +59,12 @@ function pickerDefs(view) {
   };
 }
 
+// 有筛选条件时，搜索框右侧显示一个朱红小圆点，不再单独占一行结果栏
+function activeFilter(filters, defs) {
+  if (filters.q || filters.topic !== 'all' || filters.unread) return true;
+  return ['source', 'evidence', 'period', 'assessment'].some(key => filters[key] !== defs[key].values[0]);
+}
+
 function initialData(view, title, defs) {
   const data = {
     title,
@@ -69,10 +75,11 @@ function initialData(view, title, defs) {
     topicList: topicItems(),
     filterOpen: false,
     filterHint: '筛选',
+    filterActive: false,
     unread: false,
     cards: [],
     count: 0,
-    resultText: '0 条',
+    resultText: '0 条结果',
     loading: true,
     ready: false,
     emptyState: false,
@@ -137,7 +144,8 @@ function create(view, title) {
         this.setData({
           cards: decorateCards(list, read, filters.sort, view),
           count: list.length,
-          resultText: `${list.length} 条`,
+          resultText: `${list.length} 条结果`,
+          filterActive: activeFilter(filters, defs),
           loading: false,
           ready: list.length > 0,
           emptyState: list.length === 0,

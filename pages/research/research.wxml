@@ -9,18 +9,16 @@
 
   <view class="search-box">
     <input class="search-input" value="{{q}}" bindinput="onSearch" confirm-type="search" placeholder="搜索情报或 CVE 编号" placeholder-class="placeholder" />
+    <view wx:if="{{filterActive}}" class="filter-dot"></view>
+    <text class="filter-entry" bindtap="toggleFilter">{{filterHint}}</text>
   </view>
 
   <view class="topic-row">
     <view wx:for="{{topicList}}" wx:key="id" class="{{item.className}}" data-value="{{item.id}}" bindtap="onTopic">{{item.label}}</view>
   </view>
 
-  <view class="toolbar" bindtap="toggleFilter">
-    <text class="result-count">{{resultText}}</text>
-    <text class="filter-hint">{{filterHint}}</text>
-  </view>
-
   <view wx:if="{{filterOpen}}" class="filter-panel">
+    <view class="filter-summary">{{resultText}}</view>
     <picker mode="selector" range="{{sourceLabels}}" value="{{sourceIndex}}" bindchange="onPicker" data-key="source">
       <view class="filter-row"><text>来源</text><text class="filter-value">{{sourceLabel}}</text></view>
     </picker>

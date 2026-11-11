@@ -32,7 +32,7 @@
   margin-top: 6rpx;
 }
 
-/* 搜索：白底细边框，与下方标签拉开层次 */
+/* 搜索：白底细边框。筛选入口并入同一行，不单独占工具栏 */
 .search-box {
   background: #ffffff;
   border: 1rpx solid #dedfd6;
@@ -45,13 +45,34 @@
 }
 
 .search-input {
-  width: 100%;
+  flex: 1;
+  min-width: 0;
   font-size: 26rpx;
   color: #292b25;
 }
 
 .placeholder {
   color: #8a8b82;
+}
+
+/* 有筛选条件时的小圆点，避免首屏出现多余文字 */
+.filter-dot {
+  flex: none;
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  background: #a83d30;
+  margin-right: 8rpx;
+}
+
+.filter-entry {
+  flex: none;
+  padding-left: 20rpx;
+  margin-left: 10rpx;
+  border-left: 1rpx solid #dedfd6;
+  font-size: 24rpx;
+  line-height: 1;
+  color: #a83d30;
 }
 
 /* 主题：换行排列，不再横向滚动（避免预览里的滚动条）；
@@ -61,7 +82,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 12rpx;
-  margin: 18rpx 0 4rpx;
+  margin: 18rpx 0 14rpx;
 }
 
 .topic {
@@ -80,29 +101,19 @@
   font-weight: 500;
 }
 
-/* 结果行：靠留白分隔，不额外加横线 */
-.toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18rpx 0 10rpx;
-}
-
-.result-count {
-  font-size: 22rpx;
-  color: #8a8b82;
-}
-
-.filter-hint {
-  font-size: 23rpx;
-  color: #a83d30;
-}
-
+/* 结果条数只在展开筛选面板时出现 */
 .filter-panel {
   background: #efeee8;
   border-radius: 8rpx;
   padding: 8rpx 20rpx 20rpx;
   margin-bottom: 12rpx;
+}
+
+.filter-summary {
+  font-size: 21rpx;
+  color: #8a8b82;
+  text-align: right;
+  padding: 12rpx 0 4rpx;
 }
 
 .filter-row {
